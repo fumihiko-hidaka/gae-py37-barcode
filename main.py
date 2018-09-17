@@ -7,8 +7,9 @@ from flask import Flask, send_file
 app = Flask(__name__)
 
 
-@app.route('/')
-def index():
+@app.route('/', defaults={'_': ''})
+@app.route('/<path:_>')
+def index(_):
     byte_io = BytesIO()
 
     ean = barcode.get_barcode('ean13', '4902102072618', writer=ImageWriter())
